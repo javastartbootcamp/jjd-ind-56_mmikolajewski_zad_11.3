@@ -9,28 +9,14 @@ public class Processor extends OverclockableComponent implements Overclockable {
     }
 
     @Override
-    public void overclock(int value) {
-        int n = value / 100;
-        cheatingUp(n);
-        frequency = frequency + value;
-    }
-
-    private void cheatingUp(int n) {
-        if (isOverheated(n)) {
-            throw new OverheatedException("Ryzyko przegrzania");
-        }
-        temperature = temperature + (INCREASE_TEMP_PER_100_HZ * n);
-    }
-
-    private boolean isOverheated(int n) {
-        int t = temperature + (n * INCREASE_TEMP_PER_100_HZ);
-        return t > maxTemperature;
+    int getIncreaseTemp() {
+        return INCREASE_TEMP_PER_100_HZ;
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", frequency: " + frequency + "Hz"
+                ", frequency: " + frequency + "Hz "
                 + ", temperatura: " + temperature
                 + ", maksymalna temperatura: " + maxTemperature;
     }
